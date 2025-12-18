@@ -1,0 +1,10 @@
+data:  # officehome
+  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+  dataset: {n_share: 25, n_total: 65, name: officehome, root_path: /root/autodl-tmp/image_CLEF,
+    source: 3, target: 2}
+log: {log_interval: 20, root_dir: /root/autodl-tmp/BCD_PDA/ETN/image_CLEF_log}
+misc: {gpus: 1}
+model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+test: {resume_file: best.pkl, test_interval: 50, test_only: False}  # 500变50
+train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0,
+        lr: 0.005,entropy_tradeoff: 0.2, min_step: 10000, momentum: 0.9, weight_decay: 0.001, adv_loss_aug_tradeoff: 10.0, Source_Discri: 1.0}  #lr0.001

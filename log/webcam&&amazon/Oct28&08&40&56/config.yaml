@@ -1,0 +1,37 @@
+data:
+  dataloader:
+    batch_size: 12
+    class_balance: true
+    data_workers: 0
+  dataset:
+    n_share: 10
+    n_total: 31
+    name: office31
+    root_path: /root/autodl-tmp/office31
+    source: 2
+    target: 0
+log:
+  log_interval: 100
+  root_dir: /root/BCD_PDA/log
+misc:
+  gpus: 0
+model:
+  base_model: resnet50
+  pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth
+test:
+  resume_file: best.pkl
+  test_interval: 20
+  test_only: false
+train:
+  Grass_lambda: 5000
+  PLGE_lambda_L1: 1.0
+  PLGE_lambda_L2: 10
+  adv_loss_aug_tradeoff: 1.0
+  adv_loss_tradeoff: 1.0
+  c1_loss: 0.2
+  ce_aug_tradeoff: 1.0
+  entropy_tradeoff: 0.1
+  lr: 0.001
+  min_step: 5000
+  momentum: 0.9
+  weight_decay: 0.0005

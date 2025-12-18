@@ -1,0 +1,50 @@
+# Office Home configuration
+data:
+  dataloader: {batch_size: 36, class_balance: true, data_workers: 3} #改成12试试
+  dataset: {n_share: 25, n_total: 65, name: officehome, root_path: /root/autodl-tmp/OfficeHome,
+    source: 0, target: 1}  # source: Art 0, Clipart 1, Product 2 RealWorld 3; source: Art 0, Clipart 1, Product 2 RealWorld 3;
+log: {log_interval: 100, root_dir: /root/autodl-tmp/BCD_PDA/Office_Home_log/20231106/CLIP/}
+misc: {gpus: 0}
+model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+test: {resume_file: best.pkl, test_interval: 100, test_only: false}
+resume: {is_resume: false}
+use_clip: False
+train:
+  Grass_lambda: 5000
+  adv_loss_tradeoff: 1.0
+  PLGE_lambda_L2: 10
+  c1_loss: 0.2
+  PLGE_lambda_L1: 1.0
+  ce_aug_tradeoff: 1.0
+  lr: 0.001
+  entropy_tradeoff: 0.1
+  min_step: 20000
+  momentum: 0.9
+  weight_decay: 0.0005
+  adv_loss_aug_tradeoff: 1.0  #10.0
+  Source_Discri_weight: 0.5 #5
+  clip_weight: 1
+  txt_source_label:
+    ["back_pack", "bike", "bike_helmet", "bookcase", "bottle", "calculator", "desktop_computer",
+     "desk_chair", "desk_lamp", "file_cabinet", "headphones", "keyboard", "laptop_computer",
+     "letter_tray", "mobile_phone", "monitor", "mouse", "mug", "paper_notebook",
+     "pen", "phone", "printer", "projector", "punchers", "ring_binder", "ruler",
+     "scissors", "speaker", "stapler", "tape_dispenser", "trash_can"]
+  templates:
+    '0':
+      - "This is a product photo from an online store."
+      - "An image of a {} for sale on a retail website."
+      - "A high-quality image of a {}, available online."
+      - "The official selling picture of a {}."
+    '1':
+      - "A high-resolution photo of a {} taken with a DSLR camera."
+      - "A professional shot of a {} with clear details."
+      - "A DSLR-captured image of a {}, highlighting fine textures."
+      - "An artistic photograph of a {} taken by a high-quality camera."
+    '2':
+      - "This is a {} seen in everyday life."
+      - "A picture of a {} taken with a webcam."
+      - "A casual photo of a {} from a personal camera."
+      - "An everyday view of a {} in use."
+
+

@@ -1,0 +1,47 @@
+# Office 31 configuration
+data:  
+  dataloader: {batch_size: 36, class_balance: true, data_workers: 0}
+  dataset: {n_share: 10, n_total: 31, name: office31, root_path: /root/autodl-tmp/office31,
+    source: 0, target: 2}  # source: amazon 0, dslr 1, webcam 2; target: amazon 0, dslr 1, webcam 2;
+log: {log_interval: 100, root_dir: /root/BCD_PDA/office_31_log/20231104/CLIP/opti}
+misc: {gpus: 0}
+model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+test: {resume_file: best.pkl, test_interval: 20, test_only: False}
+resume: {is_resume: False}
+train: 
+  Grass_lambda: 5000
+  adv_loss_tradeoff: 1.0
+  PLGE_lambda_L2: 10
+  c1_loss: 0.2
+  PLGE_lambda_L1: 1.0
+  ce_aug_tradeoff: 1.0
+  lr: 0.001
+  entropy_tradeoff: 0.1
+  min_step: 2000
+  momentum: 0.9
+  weight_decay: 0.0005
+  adv_loss_aug_tradeoff: 1  #10.0
+  Source_Discri_weight: 0.5 #5
+  clip_weight: 1
+  txt_source_label:
+    ["back_pack", "bike", "bike_helmet", "bookcase", "bottle", "calculator", "desktop_computer",
+     "desk_chair", "desk_lamp", "file_cabinet", "headphones", "keyboard", "laptop_computer",
+     "letter_tray", "mobile_phone", "monitor", "mouse", "mug", "paper_notebook",
+     "pen", "phone", "printer", "projector", "punchers", "ring_binder", "ruler",
+     "scissors", "speaker", "stapler", "tape_dispenser", "trash_can"]
+  templates: 
+    '0':
+      - "This is a product photo from an online store."
+      - "An image of a {} for sale on a retail website."
+      - "A high-quality image of a {}, available online."
+      - "The official selling picture of a {}."
+    '1':
+      - "A high-resolution photo of a {} taken with a DSLR camera."
+      - "A professional shot of a {} with clear details."
+      - "A DSLR-captured image of a {}, highlighting fine textures."
+      - "An artistic photograph of a {} taken by a high-quality camera."
+    '2':
+      - "This is a {} seen in everyday life."
+      - "A picture of a {} taken with a webcam."
+      - "A casual photo of a {} from a personal camera."
+      - "An everyday view of a {} in use."

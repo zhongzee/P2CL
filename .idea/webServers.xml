@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="058dbb59-8866-416d-82eb-91126bfe7d29" name="ssh -p 48350 root@connect.neimeng.seetacloud.com">
+        <fileTransfer accessType="SFTP" host="connect.neimeng.seetacloud.com" port="48350" sshConfigId="c0ccf796-8137-491c-a671-1d45289e7c22" sshConfig="root@connect.neimeng.seetacloud.com:48350 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="2691f1cb-454c-4485-9c5d-c8d0295dbbea" name="ssh -p 29004 root@connect.neimeng.seetacloud.com">
+        <fileTransfer accessType="SFTP" host="connect.neimeng.seetacloud.com" port="29004" sshConfigId="cf9a0b11-6d75-4281-8770-af8c30b38c5b" sshConfig="root@connect.neimeng.seetacloud.com:29004 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="af909735-f069-4c1f-a4ac-73397c10a649" name="ssh -p 14377 root@connect.neimeng.seetacloud.com">
+        <fileTransfer accessType="SFTP" host="connect.neimeng.seetacloud.com" port="14377" sshConfigId="3d1f1ced-396e-44aa-8e20-2938c46f90ce" sshConfig="root@connect.neimeng.seetacloud.com:14377 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="bc459c05-315f-4de6-b650-ef6223cfc43f" name="ssh -p 17680 root@connect.neimeng.seetacloud.com">
+        <fileTransfer accessType="SFTP" host="connect.neimeng.seetacloud.com" port="17680" sshConfigId="fdaedbff-e8bb-4ae9-ac37-166d918a6222" sshConfig="root@connect.neimeng.seetacloud.com:17680 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,93 @@
+data:  # office 31 配置
+ dataloader: {batch_size: 36, class_balance: true, data_workers: 0} # 可以改成ETN的batchszie=36
+ dataset: {n_share: 10, n_total: 31, name: office31, root_path: /root/autodl-tmp/office31,
+   source: 1, target: 0} #source:amazon 0 dslr 1 webcam 2; target:amazon 0 dslr 1 webcam 2
+log: {log_interval: 100, root_dir: /root/BCD_PDA/office_31_log/20231104/CLIP/use_diff_templates_source}
+misc: {gpus: 0}
+model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+test: {resume_file:best.pkl, test_interval: 20, test_only: False}
+train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office   
+       lr: 0.001,entropy_tradeoff: 0.1, min_step: 1000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0, Source_Discri_weight: 5, # 改成1 和0.5
+       txt_source_label:["back_pack", "bike", "bike_helmet", "bookcase", "bottle", "calculator", "desktop_computer",
+                  "desk_chair", "desk_lamp", "file_cabinet", "headphones", "keyboard", "laptop_computer",
+                  "letter_tray", "mobile_phone", "monitor", "mouse", "mug", "paper_notebook",
+                  "pen", "phone", "printer", "projector", "punchers", "ring_binder", "ruler",
+                  "scissors", "speaker", "stapler", "tape_dispenser", "trash_can"]}  #01 #跑5000次
+
+# tmux -S wzz3
+#python main.py --config config_office31.yaml
+# 当前配置：96.54
+
+
+#data:  # 肿瘤
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 10, n_total: 31, name: office31, root_path: E:/pycharmproject/ETN-master/data/ofiice31,
+#    source: 0, target: 1}
+#log: {log_interval: 10, root_dir: 肿瘤/小试牛刀1122 }
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\PADA-master\PADA-master\pytorch\src\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 5, test_only: False}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office 31
+#        lr: 0.001,entropy_tradeoff: 0.2, min_step: 2000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0} # 0.001
+
+
+#data:  #ENT+DRMEA  image_clef
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 6, n_total: 12, name: CLEF, root_path: E:/pycharmproject/DRMEA-master/data/image_CLEF_torch,
+#    source: 3, target: 1}
+#log: {log_interval: 10, root_dir: ENT+DRMEA/试探5，消融【P48实验4】}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 10, test_only: false}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0,
+#        lr: 0.001,entropy_tradeoff: 0.2, min_step: 1000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0}
+
+
+#data:  原码配置
+#  dataloader: {batch_size: 24, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 25, n_total: 65, name: officehome, root_path: E:\pycharmproject\ETN-master\data\OfficeHomeDataset_10072016,
+#    source: 1, target: 0}
+#log: {log_interval: 10, root_dir: Yuanma}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: Clipart_to_Art.pkl, test_interval: 50, test_only: false}  # 500变50
+#train: {adv_loss_aug_tradeoff: 10.0, adv_loss_tradeoff: 1.0, ce_aug_tradeoff: 1.0,
+#  entropy_tradeoff: 0.2, lr: 0.001, min_step: 20000, momentum: 0.9, weight_decay: 0.0005}
+
+
+#data:  # officehome
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 25, n_total: 65, name: officehome, root_path: E:\pycharmproject\ETN-master\data\OfficeHomeDataset_10072016,
+#    source: 3, target: 2}
+#log: {log_interval: 20, root_dir: public_ofiicehome\试探5}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 50, test_only: False}  # 500变50
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0,
+#        lr: 0.005,entropy_tradeoff: 0.2, min_step: 10000, momentum: 0.9, weight_decay: 0.001, adv_loss_aug_tradeoff: 10.0}  #lr0.001
+
+#data:  # mnist 配置
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 5, n_total: 10, name: office31, root_path: E:/pycharmproject/数据集压缩/MNIST_vs_USPS.mat,
+#    source: 2, target: 0}
+#log: {log_interval: 1, root_dir: public_office31 }
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 1, test_only: false}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office 31
+#        lr: 0.0001,entropy_tradeoff: 0.2, min_step: 2000, momentum: 0.9, weight_decay: 0.001, adv_loss_aug_tradeoff: 10.0}
+
+
+
+
+# COVID-19
+#data:
+#  dataloader: {batch_size: 24, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 2, n_total: 2, name: office31, root_path: E:/pycharmproject/ETN-master/data/COVID19,
+#    source: 0, target: 1}
+#log: {log_interval: 10, root_dir: COVID19\第一次试探}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 5, test_only: False}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office 31
+#        lr: 0.001,entropy_tradeoff: 0.2, min_step: 2000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0} # 0.001

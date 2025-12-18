@@ -1,0 +1,143 @@
+#data:  # office 31 配置
+# dataloader: {batch_size: 12, class_balance: true, data_workers: 0} # 可以改成ETN的batchszie=36
+# dataset: {n_share: 10, n_total: 31, name: office31, root_path: /root/autodl-tmp/office31,
+#   source: 1, target: 0} #source:amazon 0 dslr 1 webcam 2; target:amazon 0 dslr 1 webcam 2
+#log: {log_interval: 100, root_dir: /root/BCD_PDA/log/D_2_A/Source_Discri_0}
+#misc: {gpus: 0}
+#model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+#test: {resume_file:, test_interval: 20, test_only: False}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office
+#       lr: 0.001,entropy_tradeoff: 0.1, min_step: 5000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 1.0, Source_Discri: 0.5}  #01 #跑5000次
+#
+#data:  # image_CLEF 配置
+# dataloader: {batch_size: 36, class_balance: true, data_workers: 0} # 可以改成ETN的batchszie=36
+# dataset: {n_share: 6, n_total: 12, name: image_celf, root_path: /root/autodl-tmp/image_CLEF,
+#   source: 1, target: 3} #domains=['b', 'i', 'c', 'p'], I->P
+#log: {log_interval: 10, root_dir: /root/BCD_PDA/image_CLEF_log/D_2_A/Source_Discri_1}
+#misc: {gpus: 0}
+#model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+#test: {resume_file:/root/BCD_PDA/image_CLEF_log/D_2_A/Source_Discri_0/best.pkl, test_interval: 20, test_only: False}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office
+#       lr: 0.001,entropy_tradeoff: 0.2, min_step: 1000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0, Source_Discri: 1}  #01 #跑5000次
+
+# python main_opti.py --config config_image_CLEF.yaml python main.py --config config_image_CLEF.yaml
+data:  # image_CLEF 加 双通道 配置
+ dataloader: {batch_size: 36, class_balance: true, data_workers: 0} # 可以改成ETN的batchszie=36
+ dataset: {n_share: 6, n_total: 12, name: image_celf , root_path: /root/autodl-tmp/image_CLEF ,source: 3, target: 1} #domains=['b', 'i', 'c', 'p'], I→P	 P→I	I→C	C→I	 C→P	P→C
+log: {log_interval: 10, root_dir: "/root/autodl-tmp/image_CLEF_log/DACW/tsne"} # /root/autodl-tmp/image_CLEF_log/20231107/
+use_clip: False
+misc: {gpus: 0}
+model: {base_model: resnet50, pretrained_model: /root/BCD_PDA/resnet50-19c8e357.pth}
+test: {resume_file: "/root/autodl-tmp/image_CLEF_log/DACW/p&&i/Nov09&17&19&52/best.pkl", test_interval: 20, test_only: false} # p2i
+#test: {resume_file: "/root/BCD_PDA/resnet50-19c8e357.pth", test_interval: 20, test_only: false} res50
+#test: {resume_file: "/root/autodl-tmp/image_CLEF_log/Oct31&19&38&31_high/best.pkl", test_interval: 20, test_only: false}
+train: {Grass_lambda: 5000, adv_loss_tradeoff: 0.5, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office
+       lr: 0.001,entropy_tradeoff: 1, min_step: 1000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10, Source_Discri_weight: 0.5}  #01 #跑5000次
+# train: {Grass_lambda: 4425, adv_loss_tradeoff: 0.768, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.657, #office
+#        lr: 0.00669,entropy_tradeoff: 1.2, min_step: 2000, momentum: 0.7982, weight_decay: 0.00658, adv_loss_aug_tradeoff: 1.7024, Source_Discri_weight: 0.75}  #01 #跑5000次
+# train: {Grass_lambda: 8022, adv_loss_tradeoff: 1.0876760163688801, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0876760163688801, #office
+#        lr: 0.004749200684524698,entropy_tradeoff: 1.575563470838301, min_step: 2000, momentum: 0.7983485999191349, weight_decay: 0.00765108704232939, adv_loss_aug_tradeoff: 1.4405512597245278, Source_Discri_weight: 1.4143907719683846}  #01 #跑5000次
+# P->C 50.5% 目前这个参数  默认参数 0.813
+# Best Hyperparameters: {'Grass_lambda': 8022, 'adv_loss_tradeoff': 1.0876760163688801, 'ce_aug_tradeoff': 1.7954285345778358, 'lr': 0.004749200684524698, 'entropy_tradeoff': 1.575563470838301, 'min_step': 1428, 'momentum': 0.7983485999191349, 'weight_decay': 0.00765108704232939, 'adv_loss_aug_tradeoff': 1.4405512597245278, 'Source_Discri_weight': 1.4143907719683846}
+# Best Test Accuracy: 0.9566666666666667
+# C->P 50.5% 目前这个参数  默认参数 0.813
+# Best Hyperparameters: {'Grass_lambda': 4769, 'adv_loss_tradeoff': 1.8387845023137948, 'ce_aug_tradeoff': 1.177957696464337, 'lr': 0.0046775242370075765, 'entropy_tradeoff': 0.7831970216789409, 'min_step': 1723, 'momentum': 0.8450699354721172, 'weight_decay': 0.00576550971948071, 'adv_loss_aug_tradeoff': 0.9621318491508117, 'Source_Discri_weight': 1.4078214980983037}
+# Best Test Accuracy: 0.77
+# I->P调参
+# train: {Grass_lambda: 1522, adv_loss_tradeoff: 1.25, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 0.666, #office
+#        lr: 0.0008,entropy_tradeoff: 0.15559, min_step: 5000, momentum: 0.9, weight_decay: 0.00379, adv_loss_aug_tradeoff: 0.779, Source_Discri_weight: 1.823}  #01 #跑5000次
+# # P->I
+# train: {Grass_lambda: 2476, adv_loss_tradeoff: 0.19788, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 0.666, #office
+#        lr: 0.0079,entropy_tradeoff: 1.8698, min_step: 2200, momentum: 0.87131, weight_decay: 0.00949, adv_loss_aug_tradeoff: 1.895866, Source_Discri_weight: 1.823}  #01 #跑5000次
+# I->C
+# Best Hyperparameters: {'Grass_lambda': 4425, 'adv_loss_tradeoff': 0.7681188524630684, 'ce_aug_tradeoff': 1.6576122435186933, 'lr': 0.006695983166403068, 'entropy_tradeoff': 1.200243668524194, 'min_step': 1592, 'momentum': 0.7982073007523451, 'weight_decay': 0.006585839384067393, 'adv_loss_aug_tradeoff': 1.7024476867955003, 'Source_Discri_weight': 0.7512991745825275}
+#  current_test: 0.8066666666666666
+# best_test: 0.9033333333333333
+# C->I 
+# Best Hyperparameters: {'Grass_lambda': 3131, 'adv_loss_tradeoff': 0.6252211307862525, 'ce_aug_tradeoff': 0.9825770249690483, 'lr': 0.006029424375888527, 'entropy_tradeoff': 0.6353157520423492, 'min_step': 1885, 'momentum': 0.7497848405536982, 'weight_decay': 0.0012179871340937708, 'adv_loss_aug_tradeoff': 0.729741306652708, 'Source_Discri_weight': 0.6040790392379888}
+# current_test: 0.88
+# best_test: 0.9133333333333333
+# P->C
+# Best Hyperparameters: {'Grass_lambda': 8022, 'adv_loss_tradeoff': 1.0876760163688801, 'ce_aug_tradeoff': 1.7954285345778358, 'lr': 0.004749200684524698, 'entropy_tradeoff': 1.575563470838301, 'min_step': 1428, 'momentum': 0.7983485999191349, 'weight_decay': 0.00765108704232939, 'adv_loss_aug_tradeoff': 1.4405512597245278, 'Source_Discri_weight': 1.4143907719683846}
+# Best Test Accuracy: 0.9566666666666667
+
+# C-〉I
+# I->P
+# 81.25的结果配置：entropy_tradeoff: 0.1；adv_loss_aug_tradeoff: 1.0
+# 当前配置：entropy_tradeoff: 0.2， adv_loss_aug_tradeoff: 10.0，无Source_Discri，I->P 82.2916666%
+# 当前配置：entropy_tradeoff: 0.2， adv_loss_aug_tradeoff: 10.0，有Source_Discri=0.5和1.0，I->P 82.291666%
+# P->I
+# {'Grass_lambda': 2476, 'adv_loss_tradeoff': 0.19788348041458426, 'ce_aug_tradeoff': 0.7912562608386177, 'lr': 0.007957411784015588, 'entropy_tradeoff': 1.8698494894741613, 'min_step': 2204, 'momentum': 0.8713187964695405, 'weight_decay': 0.009492457165697507, 'adv_loss_aug_tradeoff': 1.8958666063803717, 'Source_Discri_weight': 0.3033342588052764}
+
+#data:  # 肿瘤
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 10, n_total: 31, name: office31, root_path: E:/pycharmproject/ETN-master/data/ofiice31,
+#    source: 0, target: 1}
+#log: {log_interval: 10, root_dir: 肿瘤/小试牛刀1122 }
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\PADA-master\PADA-master\pytorch\src\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 5, test_only: False}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office 31
+#        lr: 0.001,entropy_tradeoff: 0.2, min_step: 2000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0} # 0.001
+
+
+#data:  #ENT+DRMEA  image_clef
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 6, n_total: 12, name: CLEF, root_path: E:/pycharmproject/DRMEA-master/data/image_CLEF_torch,
+#    source: 3, target: 1}
+#log: {log_interval: 10, root_dir: ENT+DRMEA/试探5，消融【P48实验4】}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 10, test_only: false}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0,
+#        lr: 0.001,entropy_tradeoff: 0.2, min_step: 1000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0}
+
+
+#data:  原码配置
+#  dataloader: {batch_size: 24, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 25, n_total: 65, name: officehome, root_path: E:\pycharmproject\ETN-master\data\OfficeHomeDataset_10072016,
+#    source: 1, target: 0}
+#log: {log_interval: 10, root_dir: Yuanma}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: Clipart_to_Art.pkl, test_interval: 50, test_only: false}  # 500变50
+#train: {adv_loss_aug_tradeoff: 10.0, adv_loss_tradeoff: 1.0, ce_aug_tradeoff: 1.0,
+#  entropy_tradeoff: 0.2, lr: 0.001, min_step: 20000, momentum: 0.9, weight_decay: 0.0005}
+
+
+#data:  # officehome
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 25, n_total: 65, name: officehome, root_path: E:\pycharmproject\ETN-master\data\OfficeHomeDataset_10072016,
+#    source: 3, target: 2}
+#log: {log_interval: 20, root_dir: public_ofiicehome\试探5}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 50, test_only: False}  # 500变50
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0,
+#        lr: 0.005,entropy_tradeoff: 0.2, min_step: 10000, momentum: 0.9, weight_decay: 0.001, adv_loss_aug_tradeoff: 10.0}  #lr0.001
+
+#data:  # mnist 配置
+#  dataloader: {batch_size: 12, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 5, n_total: 10, name: office31, root_path: E:/pycharmproject/数据集压缩/MNIST_vs_USPS.mat,
+#    source: 2, target: 0}
+#log: {log_interval: 1, root_dir: public_office31 }
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 1, test_only: false}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office 31
+#        lr: 0.0001,entropy_tradeoff: 0.2, min_step: 2000, momentum: 0.9, weight_decay: 0.001, adv_loss_aug_tradeoff: 10.0}
+
+
+
+
+# COVID-19
+#data:
+#  dataloader: {batch_size: 24, class_balance: true, data_workers: 0}
+#  dataset: {n_share: 2, n_total: 2, name: office31, root_path: E:/pycharmproject/ETN-master/data/COVID19,
+#    source: 0, target: 1}
+#log: {log_interval: 10, root_dir: COVID19\第一次试探}
+#misc: {gpus: 1}
+#model: {base_model: resnet50, pretrained_model: E:\pycharmproject\ETN-master\resnet50-19c8e357.pth}
+#test: {resume_file: best.pkl, test_interval: 5, test_only: False}
+#train: {Grass_lambda: 5000, adv_loss_tradeoff: 1.0, PLGE_lambda_L2: 10, c1_loss: 0.2, PLGE_lambda_L1: 1.0, ce_aug_tradeoff: 1.0, #office 31
+#        lr: 0.001,entropy_tradeoff: 0.2, min_step: 2000, momentum: 0.9, weight_decay: 0.0005, adv_loss_aug_tradeoff: 10.0} # 0.001
