@@ -154,11 +154,11 @@ P2CL/
 ## Citation
 
 ```bibtex
-@inproceedings{p2cl2026,
+@misc{p2cl2026,
   title={P2CL: Prototype-Constrained Consistent Learning --- Toward Controllable and Consistent Transfer},
   author={Long, Yitian and Wu, Zhongze and Yang, Feng and You, Shan and Xu, Hongyan and Su, Xiu},
-  booktitle={ICASSP},
-  year={2026}
+  year={2025},
+  note={Under review}
 }
 ```
 
